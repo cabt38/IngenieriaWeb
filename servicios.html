@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Restaurante</h1>
+        <p class="subtitulo">Restaurante de comida tipica</p>
+    </header>
+
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/acerca">Acerca</a>
+        <a href="/registro">Registro</a>
+        <a href="/servicios">Servicios</a>
+    </nav>
+
+    <main>
+
+        <section>
+            <h2>Formulario de reserva</h2>
+            <p class="ayuda">
+                Debes haberte registrado previamente para poder reservar una mesa. Si no lo has realizado puedes hacerlo en el siguiente link<a href="/registro">Registro</a>
+            </p>
+
+            <form id="formulario-reserva" action="/reservas" method="POST">
+                <div class="campo">
+                    <label for="cliente_id">ID del cliente</label>
+                    <input
+                        type="number"
+                        id="cliente_id"
+                        name="cliente_id"
+                        min="1"
+                        placeholder="ej. 1"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="fecha">Fecha</label>
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="hora">Hora</label>
+                    <input
+                        type="time"
+                        id="hora"
+                        name="hora"
+                        required
+                    >
+                </div>
+
+                <div class="campo">
+                    <label for="personas">Número de personas</label>
+                    <input
+                        type="number"
+                        id="personas"
+                        name="personas"
+                        min="1"
+                        placeholder="ej. 4"
+                        required
+                    >
+                </div>
+
+                <button type="submit">Confirmar reserva</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>· Práctica de Ingeniería Web</p>
+    </footer>
+</body>
+</html>
