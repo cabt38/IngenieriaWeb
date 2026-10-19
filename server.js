@@ -30,6 +30,11 @@ const insertarCliente = db.prepare(`
     VALUES (?, ?, ?)
 `);
 
+// Consulta para verificar que el cliente exista antes de crear su reserva
+const buscarCliente = db.prepare(`
+    SELECT id FROM clientes WHERE id = ?
+`);
+
 const insertarReserva = db.prepare(`
     INSERT INTO reservas (cliente_id, fecha, hora, personas)
     VALUES (?, ?, ?, ?)
@@ -200,6 +205,15 @@ const server = http.createServer((req, res) => {
             }
 
             try {
+
+                // Regla del dominio: toda reserva pertenece a un cliente registrado
+                if (!buscarCliente.get(clienteId)) {
+                    return responderError400(
+                        res,
+                        `No existe un cliente registrado con el identificador ${clienteId}. Regístrate primero para obtener tu ID.`,
+                        '/registro'
+                    );
+                }
                 const resultado = insertarReserva.run(clienteId, fecha, hora, personas);
 
                 console.log('Reserva almacenada con id:', resultado.lastInsertRowid);

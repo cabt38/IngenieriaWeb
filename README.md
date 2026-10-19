@@ -137,3 +137,21 @@ Base de datos: **`restaurante.db`**
 ## 10. capturas
 
 Se encuentran anexadas en la carpeta llamada capturas de pantalla
+
+## 11. Documentación OOHDM
+
+La carpeta oohdm documenta la plataforma con la metodología OOHDM con la matriz que traza cada decisión de diseño hasta su ruta, archivo, tabla y evidencia. No cambia el código ni la base de datos.
+
+| Actividad          | Qué modela en la plataforma                                                                             | Diagrama                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Conceptual         | `clientes` (1) — (0..\*) `reservas`                                                                     | [modelo_conceptual.svg](oohdm/modelo_conceptual.drawio.svg)   |
+| Navegacional       | Nodos `GET /`, `/acerca`, `/registro`, `/servicios` y respuestas de `POST /clientes` y `POST /reservas` | [modelo_navegacional.svg](oohdm/02_modelo_navegacional.svg)   |
+| Interfaz abstracta | Formularios de Registro y Servicios (campos, ID generado, 201 y 400)                                    | [interfaz_abstracta.svg](oohdm/Interfaz_abstracta.drawio.svg) |
+| Implementación     | Navegador, `server.js`, HTML/CSS y `restaurante.db`                                                     | [implementacion.svg](oohdm/implementacion.drawio.svg)         |
+
+![Modelo conceptual](oohdm/modelo_conceptual.drawio.svg)
+![Modelo navegacional](oohdm/02_modelo_navegacional.svg)
+![Interfaz abstracta](oohdm/Interfaz_abstracta.drawio.svg)
+![Implementación](oohdm/implementacion.drawio.svg)
+
+---
