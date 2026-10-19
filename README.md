@@ -42,16 +42,16 @@ RestauranteWeb/
 
 ## 4. Tabla de rutas
 
-| Método | Ruta          | Archivo / Respuesta                          | Código HTTP esperado |
-|--------|---------------|-----------------------------------------------|-----------------------|
-| GET    | `/`           | `index.html`                                   | 200                   |
-| GET    | `/acerca`     | `acerca.html`                                  | 200                   |
-| GET    | `/registro`   | `registro.html`                                | 200                   |
-| GET    | `/servicios`  | `servicios.html`                               | 200                   |
-| GET    | `/styles.css` | `styles.css` (Content-Type: text/css)          | 200                   |
-| POST   | `/clientes`   | Inserta en `clientes`, muestra `id` generado   | 201 / 400 / 500       |
-| POST   | `/reservas`   | Inserta en `reservas` asociada al `cliente_id` | 201 / 400 / 500       |
-| *      | cualquier otra | —                                              | 404                   |
+| Método | Ruta           | Archivo / Respuesta                            | Código HTTP esperado |
+| ------ | -------------- | ---------------------------------------------- | -------------------- |
+| GET    | `/`            | `index.html`                                   | 200                  |
+| GET    | `/acerca`      | `acerca.html`                                  | 200                  |
+| GET    | `/registro`    | `registro.html`                                | 200                  |
+| GET    | `/servicios`   | `servicios.html`                               | 200                  |
+| GET    | `/styles.css`  | `styles.css` (Content-Type: text/css)          | 200                  |
+| POST   | `/clientes`    | Inserta en `clientes`, muestra `id` generado   | 201 / 400 / 500      |
+| POST   | `/reservas`    | Inserta en `reservas` asociada al `cliente_id` | 201 / 400 / 500      |
+| \*     | cualquier otra | —                                              | 404                  |
 
 ## 5. Modelo de datos
 
@@ -59,23 +59,22 @@ Base de datos: **`restaurante.db`**
 
 ### Tabla `clientes` (entidad principal — genera el identificador)
 
-| Columna   | Tipo    | Restricciones               | Propósito                     |
-|-----------|---------|------------------------------|--------------------------------|
-| id        | INTEGER | PRIMARY KEY AUTOINCREMENT    | Identificador único del cliente |
-| nombre    | TEXT    | NOT NULL                    | Nombre completo del cliente     |
-| correo    | TEXT    | NOT NULL                    | Correo electrónico del cliente  |
-| telefono  | TEXT    | NOT NULL                    | Teléfono de contacto            |
+| Columna  | Tipo    | Restricciones             | Propósito                       |
+| -------- | ------- | ------------------------- | ------------------------------- |
+| id       | INTEGER | PRIMARY KEY AUTOINCREMENT | Identificador único del cliente |
+| nombre   | TEXT    | NOT NULL                  | Nombre completo del cliente     |
+| correo   | TEXT    | NOT NULL                  | Correo electrónico del cliente  |
+| telefono | TEXT    | NOT NULL                  | Teléfono de contacto            |
 
 ### Tabla `reservas` (operaciones — almacena el identificador y los datos del servicio)
 
-| Columna     | Tipo    | Restricciones            | Propósito                                   |
-|-------------|---------|---------------------------|----------------------------------------------|
-| id          | INTEGER | PRIMARY KEY AUTOINCREMENT | Identificador único de la reserva            |
-| cliente_id  | INTEGER | NOT NULL                  | Referencia lógica al `id` de `clientes`      |
-| fecha       | TEXT    | NOT NULL                  | Fecha de la reserva (AAAA-MM-DD)             |
-| hora        | TEXT    | NOT NULL                  | Hora de la reserva (HH:MM)                   |
-| personas    | INTEGER | NOT NULL                  | Número de personas para la mesa              |
-
+| Columna    | Tipo    | Restricciones             | Propósito                               |
+| ---------- | ------- | ------------------------- | --------------------------------------- |
+| id         | INTEGER | PRIMARY KEY AUTOINCREMENT | Identificador único de la reserva       |
+| cliente_id | INTEGER | NOT NULL                  | Referencia lógica al `id` de `clientes` |
+| fecha      | TEXT    | NOT NULL                  | Fecha de la reserva (AAAA-MM-DD)        |
+| hora       | TEXT    | NOT NULL                  | Hora de la reserva (HH:MM)              |
+| personas   | INTEGER | NOT NULL                  | Número de personas para la mesa         |
 
 ## 6. Requisitos previos e instalación
 
@@ -120,22 +119,21 @@ Base de datos: **`restaurante.db`**
 
 ## 9. Pruebas realizadas y resultados esperados
 
-| Prueba          | Resultado esperado                                              | Resultado obtenido |
-|------------------|-------------------------------------------------------------------|----------------------|
-| Navegación       | Las 4 rutas GET (`/`, `/acerca`, `/registro`, `/servicios`) responden 200 | 200 en las 4      |
-| CSS              | `GET /styles.css` responde 200 con `Content-Type: text/css`       | Confirmado         |
-| Registro         | Envío válido a `/clientes` responde 201, crea el cliente y muestra su `id` | id=1 generado     |
-| Servicio         | Envío válido a `/reservas` con el `cliente_id` anterior responde 201 | reserva id=1 creada |
-| Coherencia       | La tabla `reservas` contiene el `cliente_id` y no repite nombre/correo/teléfono | Verificado         |
-| Validación       | Un campo vacío en `/clientes` o `/reservas` responde 400 y no crea registro | 400 confirmado     |
-| Codificación     | Tildes, `@` y espacios se almacenan correctamente (UTF-8)           | Verificado         |
-| Persistencia     | Los datos permanecen después de reiniciar el servidor              | `restaurante.db` conserva los registros |
-| Ruta inexistente | Una URL no definida responde 404                                   | Confirmado         |
-| Reproducibilidad | El proyecto, copiado a otra carpeta, inicia con `node server.js`   | Sin dependencias externas |
+| Prueba           | Resultado esperado                                                              | Resultado obtenido                      |
+| ---------------- | ------------------------------------------------------------------------------- | --------------------------------------- |
+| Navegación       | Las 4 rutas GET (`/`, `/acerca`, `/registro`, `/servicios`) responden 200       | 200 en las 4                            |
+| CSS              | `GET /styles.css` responde 200 con `Content-Type: text/css`                     | Confirmado                              |
+| Registro         | Envío válido a `/clientes` responde 201, crea el cliente y muestra su `id`      | id=1 generado                           |
+| Servicio         | Envío válido a `/reservas` con el `cliente_id` anterior responde 201            | reserva id=1 creada                     |
+| Coherencia       | La tabla `reservas` contiene el `cliente_id` y no repite nombre/correo/teléfono | Verificado                              |
+| Validación       | Un campo vacío en `/clientes` o `/reservas` responde 400 y no crea registro     | 400 confirmado                          |
+| Codificación     | Tildes, `@` y espacios se almacenan correctamente (UTF-8)                       | Verificado                              |
+| Persistencia     | Los datos permanecen después de reiniciar el servidor                           | `restaurante.db` conserva los registros |
+| Ruta inexistente | Una URL no definida responde 404                                                | Confirmado                              |
+| Reproducibilidad | El proyecto, copiado a otra carpeta, inicia con `node server.js`                | Sin dependencias externas               |
 
 ---
 
-## 10. capturas 
+## 10. capturas
 
 Se encuentran anexadas en la carpeta llamada capturas de pantalla
-
